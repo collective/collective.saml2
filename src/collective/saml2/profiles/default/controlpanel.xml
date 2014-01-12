@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<object name="portal_controlpanel"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n" 
+    i18n:domain="collective.saml2"
+    purge="False">
+	
+	<configlet 
+		title="SAML2"
+		action_id="saml2"
+		appId="collective.saml2"
+    	category="Products" 
+    	condition_expr=""
+    	url_expr="string:${portal_url}/@@saml2_controlpanel"
+    	visible="True"
+    	i18n:attributes="title">
+  			<permission>Manage portal</permission>
+ 	</configlet>
+
+</object>
