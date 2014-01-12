@@ -15,7 +15,7 @@ long_description = (
 
 setup(name='collective.saml2',
       version=version,
-      description="Integration of SAML2 web single-sign-on for Plone",
+      description="Installation of SAML2 web single-sign-on for Plone (dm.zope.saml2)",
       long_description=long_description,
       # Get more strings from
       # http://pypi.python.org/pypi?%3Aaction=list_classifiers

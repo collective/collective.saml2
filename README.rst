@@ -3,19 +3,41 @@
 Introduction
 ============
 
+This plugin is mainly a wrapper around `dm.zope.saml2`_ to aid in installation
+for a Plone environment. All the hard work is done by Dieter Maurer's excellent
+`dm.zope.saml2`_.
+
 This plugin does the following so far
 
-- ensure the dependencies for dm.zope.saml2 are installed
-- provide an example buildout to build all the dependencies standalone
-- document how to configure dm.zope.saml2
+- ensure the dependencies for `dm.zope.saml2`_ are installed
+- provide an `example buildout`_ to build all the dependencies standalone
+- document how to configure `dm.zope.saml2`_
 - a patch to activate the encryption type
-- a patch to remove the need for zope sessions
+- a patch to remove the need for zope sessions or transactions during login
 
 In the future we hope to also include a control panel to
-- configure a Plone site as either a IdP or a SP
+
+- help configure a Plone site as either a IdP or a SP
 - managing services including manual configuration (without metadata urls)
-- override the login screen to all login via IdP
 - management of keys TTW
+
+Building
+========
+
+Unfortunatly `dm.zope.saml2`_ was written requiring many dependencies
+
+- `dm.saml2`_
+- `dm.reuse`_
+- `dm.zope.schema`_
+- `dm.xmlsec.binding`_
+- `PyXB`_
+- `xmlsec1`_
+- `lxml`_
+- `openssl`_ (although other encryption libraries can be used)
+
+There is an `example buildout`_ to compile all these components from source
+if you want a completely standalone solution.
+
 
 Configuration
 =============
@@ -104,9 +126,15 @@ If your Plone is going to be your SP do the following
 
 1. Go to ZMI Plone root and then acl_users.
 2. Add a "Saml integrated simple spsso plugin (integrated spsso)" object. Call it
-   "saml2_sp". Again id doesn't really matter.
+   "saml2sp". Again id doesn't really matter.
 3. You can use the defaults. Save.
-4. Click the "activate tab".
+4. Click the "activate tab" and activate each PAS plugin.
+5. Click 'Authentication' in the Activate tab and ensure saml2sp is the top plugin.
+   Do the same for 'Challenge'. This ensure that if a user is required to login
+   the saml2 plugin will be used and the user will be directed to select a IdP
+   to login via. Note that this won't change the login link in the personal-bar.
+   This link is set to 'login_form' so needs to be changed manually.
+
 
 If your Plone is the IdP and you are setting up another service as the SP you
 will need to look at the documentation of your SP on how to configure it. If
@@ -115,6 +143,47 @@ you wrote down in step 1. However many SP's don't support this standard. In
 which case you will need to look at the metadata file contents and take the
 values your SP needs from there.
 
+Step 4. Test
+------------
+
+To test an IdP you will need a SP. You can use another Plone site (same one
+won't work) or another SAML2 SP.
+
+To test an SP you will need a IdP. You can use another Plone site or another
+SAML2 SP.
+
+Step 5. Member Attributes
+-------------------------
+
+TODO
+
+Compatibility
+=============
+
+TODO
+
+Some SAML2 SP's expect to see a key passed back in the authentication response.
+The key is compared against one store locally on the SP to ensure its the correct one.
+`dm.zope.saml2`_ doesn't support this, instead expecting the key to be shared
+and updated via the metadata url.
+
+Thanks
+======
+
+Dieter Maurer for the excellent dm.zope.saml2 which does all the work.
+
+Work on collective.saml2 is so far sponsored `PretaGov`_.
 
 
 
+.. _example buildout: https://github.com/collective/collective.saml2
+.. _dm.zope.saml2: https://pypi.python.org/pypi/dm.zope.saml2
+.. _dm.reuse: https://pypi.python.org/pypi/dm.reuse
+.. _dm.saml2: https://pypi.python.org/pypi/dm.saml2
+.. _dm.xmlsec.binding: https://pypi.python.org/pypi/dm.xmlsec.binding
+.. _dm.zope.schema: https://pypi.python.org/pypi/dm.zope.schema
+.. _PyXB: https://pypi.python.org/pypi/PyXB
+.. _lxml: https://pypi.python.org/pypi/lxml
+.. _xmlsec1: http://www.aleksey.com/xmlsec/
+.. _openssl: http://www.openssl.org/
+.. _PretaGov: http://www.pretagov.com.au
