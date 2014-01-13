@@ -158,6 +158,20 @@ Step 5. Member Attributes
 
 TODO
 
+Patches
+=======
+
+c.saml2 overrides the IRelayStateStore implementation for the idpsso so as to
+store the original SAML request during the login process. Instead of storing
+it in the database incurring a transaction for each login attempt, it stores
+it back in the users browsers in a cookie.
+
+c.saml2 also makes the call to 'dm.xmlsec.binding.initialize()' on zope startup
+refered to in the `dm.zope.saml2` implementation. This means that currently
+c.saml2 is hard-coded to use openssl. In future this might be made configurable
+via an environment variable, otherwise try setting this yourself as per
+`dm.xmlsec.binding`_ documentation.
+
 Compatibility
 =============
 
