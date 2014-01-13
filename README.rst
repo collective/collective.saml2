@@ -24,7 +24,8 @@ In the future we hope to also include a control panel to
 Building
 ========
 
-Unfortunatly `dm.zope.saml2`_ was written requiring many dependencies
+Unfortunately `dm.zope.saml2`_ was written requiring many dependencies some of
+which are c-extensions requiring some libraries.
 
 - `dm.saml2`_
 - `dm.reuse`_
@@ -170,7 +171,7 @@ and updated via the metadata url.
 Thanks
 ======
 
-Dieter Maurer for the excellent dm.zope.saml2 which does all the work.
+`Dieter Maurer`_ for the excellent dm.zope.saml2 which does all the work.
 
 Work on collective.saml2 is so far sponsored `PretaGov`_.
 
@@ -187,3 +188,4 @@ Work on collective.saml2 is so far sponsored `PretaGov`_.
 .. _xmlsec1: http://www.aleksey.com/xmlsec/
 .. _openssl: http://www.openssl.org/
 .. _PretaGov: http://www.pretagov.com.au
+.. _Dieter Maurer:http://www.dieter.handshake.de/
