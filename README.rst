@@ -244,7 +244,7 @@ Work on collective.saml2 is so far sponsored by `PretaGov`_.
 
 
 
-.. _example buildout: https://github.com/collective/collective.saml2
+.. _example buildout: https://github.com/collective/collective.saml2/blob/master/buildout.cfg
 .. _dm.zope.saml2: https://pypi.python.org/pypi/dm.zope.saml2
 .. _dm.reuse: https://pypi.python.org/pypi/dm.reuse
 .. _dm.saml2: https://pypi.python.org/pypi/dm.saml2
