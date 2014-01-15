@@ -97,7 +97,7 @@ If Plone is going to be your IdP do the following
 
 1. Go to the ZMI plone root and add a
    "Saml simple idpsso with integrated attribute provider".
-2. Give the id "saml2_idp" but it doesn't really matter. This id will appear
+2. Give the id "saml2idp" but it doesn't really matter. This id will appear
    in the url of some of the urls used as part of the authentication process.
 3. You're done.
 
@@ -205,6 +205,25 @@ one to authenticate via the other.
 Step 5. Member Attributes
 -------------------------
 
+If you set your Plone site up as an IdP then you make member attributes
+or arbritrary data available to the SP's.
+
+1. If you setup your IdP using these instructions you would have created an
+   object in your Plone root called `saml2idp` of type
+   'Saml simple idpsso with integrated attribute provider'. Open this.
+2. Click 'Add Saml provided attribute.
+3. If the data is an attribute of your member object such as provided by LDAP
+   plugin or another PAS plugin then just enter the attribute name as the id.
+   Otherwise pick an id and use the 'Evaluator' field togeather with a
+   PythonScript or a view to determine the information to send.
+4. External attribute name will be what the your SP uses to request this data.
+5. After configuring your attributes you metadata file will have changed to
+   reflect this additional service. You may need to ensure your SP obtains
+   the update metadata file.
+6. Configure your SP to request the attributes.nNote that the attributes will
+   not automatically be sent with the authentication response but rather are
+   sent in response to a `SAML Attribute Query`_.
+
 TODO
 
 Patches
@@ -273,3 +292,4 @@ Work on collective.saml2 is so far sponsored by `PretaGov`_.
 .. _metadata: http://en.wikipedia.org/wiki/SAML_2.0#SAML_2.0_Metadata
 .. _Metadata: http://en.wikipedia.org/wiki/SAML_2.0#SAML_2.0_Metadata
 .. _metadata files for shibboleth: https://wiki.shibboleth.net/confluence/display/SHIB2/MetadataForSP
+.. _SAML Attribute Query: http://en.wikipedia.org/wiki/SAML_2.0#SAML_Attribute_Query
