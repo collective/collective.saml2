@@ -18,8 +18,9 @@ This plugin does the following so far
 In the future we hope to also include a control panel to
 
 - help configure a Plone site as either a IdP or a SP
-- managing services including manual configuration (without metadata urls)
+- managing services including manual configuration (without `metadata`_ urls)
 - management of keys TTW
+- some tests to ensure comparability with Plone
 
 Building
 ========
@@ -44,25 +45,29 @@ Configuration
 =============
 
 First you need to decide if you want your Plone to be an IdP or an SP.
+
 An IdP means the users and passwords will be stored in your Plone site and other
 services will be configured to redirect to Plone to be able to login into their
 respective sites.
+
 An SP means that you won't store users and passwords locally and instead your
 users will be redirected to another site (the IdP) during the login process to
-be authenticated. Examples of alternative IdP's might be Microsoft Active Directory
-Federated services (ADFS) or Shiboleth.
+be authenticated. Examples of alternative IdP's might be `Microsoft Active Directory
+Federated services`_ (`ADFS`_) or `Shibboleth`_, or another Plone site configured
+as an IdP.
+
 
 Step 1. Setup your authority
 ----------------------------
 
 Regardless if you are going to be an IdP or SP you will need a single authority
 object. This object contains assertions about what your service can do and
-what other services can do. It also provides a public url to a XML Metadata file
+what other services can do. It also provides a public url to a XML `Metadata`_ file
 that contains the SAML2 assertions.
 
 1. In the ZMI Add at the Plone root a "Saml authority" object.
 2. Give it the id "saml2auth". It doesn't matter really what it's called but
-   it will appear in the public metadata url you will give to the owners of
+   it will appear in the public `metadata`_ url you will give to the owners of
    other services
 3. Entity id. This is important. This is an id that should uniquely identify
    your service from other services that are part of the SSO network. For
@@ -73,27 +78,13 @@ that contains the SAML2 assertions.
    means you will need to find a
    way to deploy these files to your remote machines.
 5. Base url. This is a zope root url, not the base url to your Plone instance.
-6. Write down your own metadata url. This is found by clicking on the "metadata"
-   tab inside the saml2auth object. Due to something strange with iframes you
-   will likely have to open this url in a new window/tab to see the XML properly.
-   The url is your the url to your saml authority object + '/metadata'
 
-Once saved you have configured partially configured your service. Next you will
+
+Next you will
 need to configure the other services that you will collaborate with. If you are
 an SP these will be IdP's that the user can choose to login into your service via.
 If you are an IdP these will be the SP's that are allowed to login via your site.
-These remote services have to have a web accessible XML metadata file for this
-to work. Periodically the saml2 authority object will download this file. The
-file is then cached locally. The metadata contains the information about what
-kind of service and urls are needed or offered for the interaction.
 
-1. Obtain the metadata url and the entity id. The entity id is actually in the
-metadata file that the metadata url refers to.
-2. Go to ZMI plone root, then saml2auth. Click
-   "Add Saml2 entity defined by metadata providing url"
-3. "Id" must be equal to the entity id (which can be found in the metadata file).
-4. Url goes in the url field.
-5. You're done.
 
 Step 2. Setup your IdP
 ----------------------
@@ -106,19 +97,9 @@ If Plone is going to be your IdP do the following
    in the url of some of the urls used as part of the authentication process.
 3. You're done.
 
-If another service is going to the IdP you will need to consult their documentation
-on how it needs to be configured. If your IdP supports the exchange of XML
-metadata via url then all you will need is your Plone sites metadata url which
-you wrote down in Step 1.
+If your IdP isn't a Plone site you will need to consult their documentation
+on how it needs to be configured.
 
-You might find that your IdP doesn't support the metadata standard however
-as this is optional. In this case you will need to learn to read the metadata
-file to get the urls and settings from it that your IdP will need.
-
-If you don't have a direct connection between your IdP and SP you might need to
-copy the metadata file to another location that is accessible. Note however
-that your metadata file has an expiry date in it. You will need to periodicly
-update your metadata file to ensure the expiry date is in the future.
 
 Step 3. Setup your SP
 ---------------------
@@ -130,28 +111,87 @@ If your Plone is going to be your SP do the following
    "saml2sp". Again id doesn't really matter.
 3. You can use the defaults. Save.
 4. Click the "activate tab" and activate each PAS plugin.
-5. Click 'Authentication' in the Activate tab and ensure saml2sp is the top plugin.
-   Do the same for 'Challenge'. This ensure that if a user is required to login
+5. Click 'Challenge' in the Activate tab and ensure saml2sp is the top plugin.
+   This ensure that if a user is required to login
    the saml2 plugin will be used and the user will be directed to select a IdP
-   to login via. Note that this won't change the login link in the personal-bar.
-   This link is set to 'login_form' so needs to be changed manually.
-
+   to login via. Otherwise Plone's normal login page will display.
+6. (optional) Create a new login link. Plone's default login link
+   in personal tools goes direct to the cookie based authentication form
+   /login. Instead create a page in the base of your site called /loggedin.
+   Make it private it and in the sharing tab make it visible to logged in users.
+   In ZMI '/portal_actions/user/login' set the URL to
+   'string:${globals_view/navigationRootUrl}/loggedin'.
 
 If your Plone is the IdP and you are setting up another service as the SP you
-will need to look at the documentation of your SP on how to configure it. If
-it supports fetching a metadata url then all you will need is the metadata url
-you wrote down in step 1. However many SP's don't support this standard. In
-which case you will need to look at the metadata file contents and take the
-values your SP needs from there.
+will need to look at the documentation of your SP on how to configure it.
 
-Step 4. Test
+
+Step 4. Authorise
+-----------------
+
+Now that you have a working IdP and SP you will need to authorise them so they
+will work together. The SAML2 protocol is such that a IdP needs to know about the
+SP and visa versa for the authentication requests to work.
+
+Providers can be configured to authorise each other in different ways however
+`dm.zope.saml2`_ ONLY supports the `metadata`_ method. Your Plone site has
+now has a web accessible url to a `metadata`_ file that contains all the information
+the other providers need to authorise the Plone site. In return your other providers
+will need to provide a url to a `metadata`_ file that your Plone site can access.
+Periodically your Plone site will download this file. The
+file is then cached locally. The `metadata`_ contains the information about what
+kind of service and urls are needed or offered for the interaction.
+
+Note that the actual SAML2 authentication exchange doesn't require the SP and IdP
+to be directly connected. However the `metadata`_ exchange does. This can be
+worked around by locating your metadata files on a different webserver. Note however
+that your `metadata`_ file has an expiry date in it. You will need to periodically
+update your `metadata`_ file to ensure the expiry date is in the future.
+
+To configure another provider to authorise your Plone site
+
+1. Go to your SAML2 Authority object /saml2auth.
+2. Write down your own `metadata`_ url. This is found by clicking on the "`metadata`_"
+   tab inside the saml2auth object. Due to something strange with iframes you
+   will likely have to open this url in a new window/tab to see the XML properly.
+   The url is your the url to your saml authority object + '/metadata'.
+   Note that you will get an error like "DOMGenerationError: Binding value inconsistent with content model"
+   if you try to access this url before you have done step 2 or 3.
+3. Configure this url in appropriate way in your provider.
+
+You might find that your provider doesn't support the `metadata`_ standard however
+as this is optional. May implementations that claim to be SAML2 compliant
+have done so but have retained the old way of doing configuration.
+In this case you will need to learn to read the `metadata`_
+file to get the urls and settings from it that your IdP will need.
+
+
+To configure your Plone site to authorize another provider (SP or IdP)
+
+1. Obtain the metadata url and the entity id from your other provider. The entity
+   id is actually in the metadata file that the metadata url refers to.
+2. Go to ZMI plone root, then saml2auth. Click
+   "Add Saml2 entity defined by metadata providing url"
+3. "Id" must be equal to the entity id (which can be found in the metadata file).
+4. Url goes in the url field.
+5. Click on the object with the entity id. Click the metadata tab and ensure to
+   ensure the file cached and able to be parsed. You may need to open the url in a new
+   tab or window for the xml to appear properly.
+
+If your provider doesn't support the `metadata`_ standard you will need to
+manually generate a metadata file and place it in a web accessible location.
+Once you've done that, follow the above steps.
+
+
+Step 5. Test
 ------------
 
 To test an IdP you will need a SP. You can use another Plone site (same one
-won't work) or another SAML2 SP.
+won't work) or another SAML2 SP. To test an SP you will need a IdP.
+You can use another Plone site or another SAML2 SP.
 
-To test an SP you will need a IdP. You can use another Plone site or another
-SAML2 SP.
+It's possible to create two Plone sites in the same instance and authorise
+one to authenticate via the other.
 
 Step 5. Member Attributes
 -------------------------
@@ -177,17 +217,30 @@ Compatibility
 
 TODO
 
-Some SAML2 SP's expect to see a key passed back in the authentication response.
+Some SAML2 SP's expect to see both key and signature passed back in the authentication response.
 The key is compared against one store locally on the SP to ensure its the correct one.
 `dm.zope.saml2`_ doesn't support this, instead expecting the key to be shared
 and updated via the metadata url.
+
+If you get 'DOMGenerationError: Binding value inconsistent with content model'
+exception when viewing your own metadata url. Ensure your ipdsso or spsso
+objects are created first.
+
+If you get a 'ComponentLookupError: (<InterfaceClass dm.zope.saml2.interfaces.ISamlAuthority>, '')'
+when trying to remove a site with saml installed then remove your each of the
+saml related objects from the site first before deleting the whole site.
+
+You may also get a
+'ComponentLookupError: (<InterfaceClass dm.zope.saml2.interfaces.ISamlAuthority>, '')'
+during a zexp import of a SamlAuthority object. There are also problems when
+ using zexp import for the Idpsso object as well.
 
 Thanks
 ======
 
 `Dieter Maurer`_ for the excellent dm.zope.saml2 which does all the work.
 
-Work on collective.saml2 is so far sponsored `PretaGov`_.
+Work on collective.saml2 is so far sponsored by `PretaGov`_.
 
 
 
@@ -203,3 +256,7 @@ Work on collective.saml2 is so far sponsored `PretaGov`_.
 .. _openssl: http://www.openssl.org/
 .. _PretaGov: http://www.pretagov.com.au
 .. _Dieter Maurer:http://www.dieter.handshake.de/
+.. _Shibboleth: http://shibboleth.net/
+.. _ADFS: http://en.wikipedia.org/wiki/Active_Directory_Federation_Services
+.. _Microsoft Active Directory Federated services: http://en.wikipedia.org/wiki/Active_Directory_Federation_Services
+.. _metadata: http://en.wikipedia.org/wiki/SAML_2.0#SAML_2.0_Metadata
