@@ -35,8 +35,10 @@ setup(name='collective.saml2',
       install_requires=[
           'setuptools',
           # -*- Extra requirements: -*-
-          'dm.saml2>=2.0.5',
-          'dm.zope.saml2>=2.0b7'
+          'dm.saml2 > 2.0.4',
+          'dm.zope.saml2 > 2.0b7',
+          'PyXB > 1.2.2',
+          'dm.xmlsec.binding > 1.1'
       ],
       extras_require={'test': ['plone.app.testing']},
       entry_points="""
