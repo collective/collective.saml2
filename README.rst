@@ -97,7 +97,7 @@ If Plone is going to be your IdP do the following
 
 1. Go to the ZMI plone root and add a
    "Saml simple idpsso with integrated attribute provider".
-2. Give the id "saml2idp" but it doesn't really matter. This id will appear
+2. Give the id `saml2idp` but it doesn't really matter. This id will appear
    in the url of some of the urls used as part of the authentication process.
 3. You're done.
 
@@ -112,13 +112,16 @@ If your Plone is going to be your SP do the following
 
 1. Go to ZMI Plone root and then acl_users.
 2. Add a "Saml integrated simple spsso plugin (integrated spsso)" object. Call it
-   "saml2sp". Again id doesn't really matter.
+   `saml2sp`. Again id doesn't really matter.
 3. You can use the defaults. Save.
 4. Click the "activate tab" and activate each PAS plugin.
-5. Click 'Challenge' in the Activate tab and ensure saml2sp is the top plugin.
-   This ensure that if a user is required to login
+5. Click 'Challenge' in the Activate tab and ensure `saml2sp` is the top plugin.
+   This means that if an UnAuthorized exception is thrown in Plone
    the saml2 plugin will be used and the user will be directed to select a IdP
-   to login via. Otherwise Plone's normal login page will display.
+   to login via. If this isn't done Plone's normal login page will display
+   and the only way to instigate a SAML login sequence is via the explicit
+   login url. The explicit login url in this case would be
+   'acl_users/saml2sp/login'.
 6. (optional) Create a new login link. Plone's default login link
    in personal tools goes direct to the cookie based authentication form
    /login. Instead create a page in the base of your site called /loggedin.
