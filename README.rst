@@ -81,7 +81,9 @@ that contains the SAML2 assertions.
    (not the buildout-dir as you might expect)
    This is normally something like 'var/instance' with buildout.
    So a relative url starting with '../../' gets you to buildout dir.
-5. Base url. This is a zope root url, not the base url to your Plone instance.
+5. Base URL. This is a zope root URL. It needs to be in the same domain as your
+   Plone site (However, you can use your Plone site URL here - since by acquisition
+   it behaves as the zope root URL).
 
 
 Next you will
