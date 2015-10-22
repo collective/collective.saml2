@@ -47,7 +47,7 @@ class CookieRelayStateStore(object):
       # (<dm.saml2.pyxb.protocol.AuthnRequestType>, string)
       reqxml = v[0].toxml().encode('base64')
       tostore = json.dumps( (reqxml, v[1]) )
-      portal.REQUEST.response.setCookie(id, tostore)
+      portal.REQUEST.response.setCookie(id, tostore, path='/')
 
   def __getitem__(self, id):
       """retrieve value associated with *id*."""
