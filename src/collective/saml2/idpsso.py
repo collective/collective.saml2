@@ -47,6 +47,7 @@ class CookieRelayStateStore(object):
       # (<dm.saml2.pyxb.protocol.AuthnRequestType>, string)
       reqxml = v[0].toxml().encode('base64')
       tostore = json.dumps( (reqxml, v[1]) )
+      # Force the cookie to be set at the portal root
       portal.REQUEST.response.setCookie(id, tostore, path='/')
 
   def __getitem__(self, id):
