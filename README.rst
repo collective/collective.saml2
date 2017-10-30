@@ -248,8 +248,6 @@ via an environment variable, otherwise try setting this yourself as per
 Compatibility
 =============
 
-TODO
-
 Some SAML2 SP's expect to see both key and signature passed back in the authentication response.
 The key is compared against one store locally on the SP to ensure its the correct one.
 `dm.zope.saml2`_ doesn't support this, instead expecting the key to be shared
