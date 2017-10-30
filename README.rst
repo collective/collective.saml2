@@ -268,6 +268,17 @@ You may also get a
 during a zexp import of a SamlAuthority object. There are also problems when
  using zexp import for the Idpsso object as well.
 
+Notice to CentOS users
+----------------------
+
+You may experience errors compiling and/or running the software on CentOS.
+These GitHub issues mention some errors you might expect to encounter, and pointers how to solve them:
+
+- https://github.com/onelogin/python-saml/issues/30
+- https://github.com/onelogin/python-saml/issues/177
+
+Most of it is to do with the `dm.xmlsec.binding` package.
+
 Thanks
 ======
 
