@@ -37,8 +37,9 @@ setup(name='collective.saml2',
           # -*- Extra requirements: -*-
           'dm.saml2 > 2.0.4',
           'dm.zope.saml2 > 2.0b7',
-          'PyXB > 1.2.2',
-          'dm.xmlsec.binding > 1.1'
+          'PyXB == 1.2.3',#maybe it is not necessary. But bindings may not be compatible between versions 
+          'dm.xmlsec.binding > 1.1',
+          'zope.app.component'#until import in dm.zope.saml2 is not fixed
       ],
       extras_require={'test': ['plone.app.testing']},
       entry_points="""
