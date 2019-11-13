@@ -3,9 +3,6 @@
 Introduction
 ============
 
-This plugin is mainly a wrapper around `dm.zope.saml2`_ to aid in installation
-for a Plone environment. All the hard work is done by Dieter Maurer's excellent
-`dm.zope.saml2`_.
 
 What is SAML2 
 ------------------------
@@ -26,6 +23,10 @@ It doesn't provide a way to search users or groups. It's not a directory service
 
 What does collective.saml2 do 
 -----------------------------
+
+This plugin is mainly a wrapper around `dm.zope.saml2`_ to aid in installation
+for a Plone environment. All the hard work is done by Dieter Maurer's excellent
+`dm.zope.saml2`_.
 
 This plugin does the following so far
 
