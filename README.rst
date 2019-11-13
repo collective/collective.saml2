@@ -7,6 +7,26 @@ This plugin is mainly a wrapper around `dm.zope.saml2`_ to aid in installation
 for a Plone environment. All the hard work is done by Dieter Maurer's excellent
 `dm.zope.saml2`_.
 
+What does SAML2 in Plone
+------------------------
+
+SAML2 is a single sign on standard. It allows for the following use cases (depending how its configured)
+
+- A user can log into plone without entering their password
+- A user could log into another website using their credentials registered in plone
+- Two plone sites can be connected together such that you can log into one by having the login happen in the other Plone site (or no login at all if the user is already logged in there).
+
+All this is done via redirects in the browser with no direct connection needed between the two web servers. This means, unlike LDAP you can have an external website be authenticated by an internal intranet SAML2 complaint identity provider (such as ADFS) without having to setup a VPN connection between the servers.
+
+What SAML2 doesn't do
+---------------------
+
+It doesn't provide a way to search users or groups. It's not a directory service. Anything in plone that requires listing users or groups will not give you accurate information.
+
+
+What does collective.saml2 do 
+-----------------------------
+
 This plugin does the following so far
 
 - ensure the dependencies for `dm.zope.saml2`_ are installed
