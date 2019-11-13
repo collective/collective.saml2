@@ -7,7 +7,7 @@ This plugin is mainly a wrapper around `dm.zope.saml2`_ to aid in installation
 for a Plone environment. All the hard work is done by Dieter Maurer's excellent
 `dm.zope.saml2`_.
 
-What does SAML2 in Plone
+What is SAML2 
 ------------------------
 
 SAML2 is a single sign on standard. It allows for the following use cases (depending how its configured)
