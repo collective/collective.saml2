@@ -3,7 +3,7 @@
 from datetime import datetime, timedelta
 import json
 
-from zope.interface import implements
+from zope.interface import implementer
 
 from AccessControl import ClassSecurityInfo
 from OFS.SimpleItem import SimpleItem
@@ -27,6 +27,8 @@ from dm.zope.saml2.idpsso.idpsso import SimpleIdpsso
 from zope.component.hooks import getSite
 from dm.saml2.pyxb.protocol import CreateFromDocument
 
+
+@implementer(IRelayStateStore)
 class CookieRelayStateStore(object):
   """ A store to override the default OOBTree store in dm.zope.saml2.
   During the login process, if a user is not logged in, the request and relay_state
@@ -34,8 +36,6 @@ class CookieRelayStateStore(object):
   Instead of causing a transaction or the hassles of using sessions and then
   ensuring session data is replicated, we store the request back into a cookie.
   """
-
-  implements(IRelayStateStore)
 
   def __init__(self, context):
       self.context = context
