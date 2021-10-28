@@ -15,12 +15,6 @@ import sys
 # Unique identifier for bindings created at the same time
 _GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:dbbe0922-5090-11e4-8d5b-3c77e646c78e')
 
-# Version of PyXB used to generate the bindings
-_PyXBVersion = '1.2.3'
-# Generated bindings are not compatible across PyXB versions
-if pyxb.__version__ != _PyXBVersion:
-    raise pyxb.PyXBVersionError(_PyXBVersion)
-
 # Import bindings for namespaces imported into schema
 import pyxb.binding.datatypes
 #import _xenc as _ImportedBinding__xenc
@@ -562,9 +556,9 @@ def _BuildAutomaton ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location(u'/data/federation/ws-authorization.xsd', 36, 6))
+    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(u'/data/federation/ws-authorization.xsd', 36, 6))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location(u'/data/federation/ws-authorization.xsd', 37, 6))
+    cc_1 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(u'/data/federation/ws-authorization.xsd', 37, 6))
     counters.add(cc_1)
     states = []
     final_update = set()
@@ -602,7 +596,7 @@ def _BuildAutomaton_ ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'/data/federation/ws-authorization.xsd', 43, 4))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'/data/federation/ws-authorization.xsd', 43, 4))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -654,13 +648,13 @@ def _BuildAutomaton_2 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location(u'/data/federation/ws-authorization.xsd', 56, 6))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'/data/federation/ws-authorization.xsd', 56, 6))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location(u'/data/federation/ws-authorization.xsd', 57, 6))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'/data/federation/ws-authorization.xsd', 57, 6))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location(u'/data/federation/ws-authorization.xsd', 58, 6))
+    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'/data/federation/ws-authorization.xsd', 58, 6))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'/data/federation/ws-authorization.xsd', 59, 6))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'/data/federation/ws-authorization.xsd', 59, 6))
     counters.add(cc_3)
     states = []
     final_update = set()
@@ -986,7 +980,7 @@ def _BuildAutomaton_7 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'/data/federation/ws-authorization.xsd', 132, 4))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'/data/federation/ws-authorization.xsd', 132, 4))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -1028,7 +1022,7 @@ def _BuildAutomaton_8 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'/data/federation/ws-authorization.xsd', 139, 4))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'/data/federation/ws-authorization.xsd', 139, 4))
     counters.add(cc_0)
     states = []
     final_update = set()

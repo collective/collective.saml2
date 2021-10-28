@@ -15,12 +15,6 @@ import sys
 # Unique identifier for bindings created at the same time
 _GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:dbbe0922-5090-11e4-8d5b-3c77e646c78e')
 
-# Version of PyXB used to generate the bindings
-_PyXBVersion = '1.2.3'
-# Generated bindings are not compatible across PyXB versions
-if pyxb.__version__ != _PyXBVersion:
-    raise pyxb.PyXBVersionError(_PyXBVersion)
-
 # Import bindings for namespaces imported into schema
 import pyxb.binding.datatypes
 
@@ -82,7 +76,7 @@ This type defines the fault code value for Timestamp message expiration.
     _XSDLocation = pyxb.utils.utility.Location(u'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd', 17, 1)
     _Documentation = u'\nThis type defines the fault code value for Timestamp message expiration.\n          '
 tTimestampFault._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=tTimestampFault, enum_prefix=None)
-tTimestampFault.wsuMessageExpired = tTimestampFault._CF_enumeration.addEnumeration(unicode_value=u'wsu:MessageExpired', tag=u'wsuMessageExpired')
+tTimestampFault.wsuMessageExpired = tTimestampFault._CF_enumeration.addEnumeration(unicode_value=u'wsuMessageExpired', tag=u'wsuMessageExpired')
 tTimestampFault._InitializeFacetMap(tTimestampFault._CF_enumeration)
 Namespace.addCategoryObject('typeBinding', u'tTimestampFault', tTimestampFault)
 
@@ -217,11 +211,11 @@ def _BuildAutomaton ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd', 77, 3))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd', 77, 3))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd', 78, 3))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd', 78, 3))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd', 79, 3))
+    cc_2 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd', 79, 3))
     counters.add(cc_2)
     states = []
     final_update = set()

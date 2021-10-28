@@ -15,12 +15,6 @@ import sys
 # Unique identifier for bindings created at the same time
 _GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:dbbe0922-5090-11e4-8d5b-3c77e646c78e')
 
-# Version of PyXB used to generate the bindings
-_PyXBVersion = '1.2.3'
-# Generated bindings are not compatible across PyXB versions
-if pyxb.__version__ != _PyXBVersion:
-    raise pyxb.PyXBVersionError(_PyXBVersion)
-
 # Import bindings for namespaces imported into schema
 import pyxb.binding.datatypes
 
@@ -93,17 +87,17 @@ class FaultCodesType (pyxb.binding.datatypes.QName, pyxb.binding.basis.enumerati
     _XSDLocation = pyxb.utils.utility.Location(u'http://www.w3.org/2006/03/addressing/ws-addr.xsd', 92, 1)
     _Documentation = None
 FaultCodesType._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=FaultCodesType, enum_prefix=None)
-FaultCodesType.tnsInvalidAddressingHeader = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tns:InvalidAddressingHeader', tag=u'tnsInvalidAddressingHeader')
-FaultCodesType.tnsInvalidAddress = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tns:InvalidAddress', tag=u'tnsInvalidAddress')
-FaultCodesType.tnsInvalidEPR = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tns:InvalidEPR', tag=u'tnsInvalidEPR')
-FaultCodesType.tnsInvalidCardinality = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tns:InvalidCardinality', tag=u'tnsInvalidCardinality')
-FaultCodesType.tnsMissingAddressInEPR = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tns:MissingAddressInEPR', tag=u'tnsMissingAddressInEPR')
-FaultCodesType.tnsDuplicateMessageID = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tns:DuplicateMessageID', tag=u'tnsDuplicateMessageID')
-FaultCodesType.tnsActionMismatch = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tns:ActionMismatch', tag=u'tnsActionMismatch')
-FaultCodesType.tnsMessageAddressingHeaderRequired = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tns:MessageAddressingHeaderRequired', tag=u'tnsMessageAddressingHeaderRequired')
-FaultCodesType.tnsDestinationUnreachable = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tns:DestinationUnreachable', tag=u'tnsDestinationUnreachable')
-FaultCodesType.tnsActionNotSupported = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tns:ActionNotSupported', tag=u'tnsActionNotSupported')
-FaultCodesType.tnsEndpointUnavailable = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tns:EndpointUnavailable', tag=u'tnsEndpointUnavailable')
+FaultCodesType.tnsInvalidAddressingHeader = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tnsInvalidAddressingHeader', tag=u'tnsInvalidAddressingHeader')
+FaultCodesType.tnsInvalidAddress = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tnsInvalidAddress', tag=u'tnsInvalidAddress')
+FaultCodesType.tnsInvalidEPR = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tnsInvalidEPR', tag=u'tnsInvalidEPR')
+FaultCodesType.tnsInvalidCardinality = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tnsInvalidCardinality', tag=u'tnsInvalidCardinality')
+FaultCodesType.tnsMissingAddressInEPR = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tnsMissingAddressInEPR', tag=u'tnsMissingAddressInEPR')
+FaultCodesType.tnsDuplicateMessageID = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tnsDuplicateMessageID', tag=u'tnsDuplicateMessageID')
+FaultCodesType.tnsActionMismatch = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tnsActionMismatch', tag=u'tnsActionMismatch')
+FaultCodesType.tnsMessageAddressingHeaderRequired = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tnsMessageAddressingHeaderRequired', tag=u'tnsMessageAddressingHeaderRequired')
+FaultCodesType.tnsDestinationUnreachable = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tnsDestinationUnreachable', tag=u'tnsDestinationUnreachable')
+FaultCodesType.tnsActionNotSupported = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tnsActionNotSupported', tag=u'tnsActionNotSupported')
+FaultCodesType.tnsEndpointUnavailable = FaultCodesType._CF_enumeration.addEnumeration(unicode_value=u'tnsEndpointUnavailable', tag=u'tnsEndpointUnavailable')
 FaultCodesType._InitializeFacetMap(FaultCodesType._CF_enumeration)
 Namespace.addCategoryObject('typeBinding', u'FaultCodesType', FaultCodesType)
 
@@ -138,17 +132,17 @@ class FaultCodesOpenEnumType (pyxb.binding.basis.STD_union):
     _MemberTypes = ( FaultCodesType, pyxb.binding.datatypes.QName, )
 FaultCodesOpenEnumType._CF_enumeration = pyxb.binding.facets.CF_enumeration(value_datatype=FaultCodesOpenEnumType)
 FaultCodesOpenEnumType._CF_pattern = pyxb.binding.facets.CF_pattern()
-FaultCodesOpenEnumType.tnsInvalidAddressingHeader = u'tns:InvalidAddressingHeader'# originally FaultCodesType.tnsInvalidAddressingHeader
-FaultCodesOpenEnumType.tnsInvalidAddress = u'tns:InvalidAddress'# originally FaultCodesType.tnsInvalidAddress
-FaultCodesOpenEnumType.tnsInvalidEPR = u'tns:InvalidEPR'# originally FaultCodesType.tnsInvalidEPR
-FaultCodesOpenEnumType.tnsInvalidCardinality = u'tns:InvalidCardinality'# originally FaultCodesType.tnsInvalidCardinality
-FaultCodesOpenEnumType.tnsMissingAddressInEPR = u'tns:MissingAddressInEPR'# originally FaultCodesType.tnsMissingAddressInEPR
-FaultCodesOpenEnumType.tnsDuplicateMessageID = u'tns:DuplicateMessageID'# originally FaultCodesType.tnsDuplicateMessageID
-FaultCodesOpenEnumType.tnsActionMismatch = u'tns:ActionMismatch'# originally FaultCodesType.tnsActionMismatch
-FaultCodesOpenEnumType.tnsMessageAddressingHeaderRequired = u'tns:MessageAddressingHeaderRequired'# originally FaultCodesType.tnsMessageAddressingHeaderRequired
-FaultCodesOpenEnumType.tnsDestinationUnreachable = u'tns:DestinationUnreachable'# originally FaultCodesType.tnsDestinationUnreachable
-FaultCodesOpenEnumType.tnsActionNotSupported = u'tns:ActionNotSupported'# originally FaultCodesType.tnsActionNotSupported
-FaultCodesOpenEnumType.tnsEndpointUnavailable = u'tns:EndpointUnavailable'# originally FaultCodesType.tnsEndpointUnavailable
+FaultCodesOpenEnumType.tnsInvalidAddressingHeader = u'tnsInvalidAddressingHeader'# originally FaultCodesType.tnsInvalidAddressingHeader
+FaultCodesOpenEnumType.tnsInvalidAddress = u'tnsInvalidAddress'# originally FaultCodesType.tnsInvalidAddress
+FaultCodesOpenEnumType.tnsInvalidEPR = u'tnsInvalidEPR'# originally FaultCodesType.tnsInvalidEPR
+FaultCodesOpenEnumType.tnsInvalidCardinality = u'tnsInvalidCardinality'# originally FaultCodesType.tnsInvalidCardinality
+FaultCodesOpenEnumType.tnsMissingAddressInEPR = u'tnsMissingAddressInEPR'# originally FaultCodesType.tnsMissingAddressInEPR
+FaultCodesOpenEnumType.tnsDuplicateMessageID = u'tnsDuplicateMessageID'# originally FaultCodesType.tnsDuplicateMessageID
+FaultCodesOpenEnumType.tnsActionMismatch = u'tnsActionMismatch'# originally FaultCodesType.tnsActionMismatch
+FaultCodesOpenEnumType.tnsMessageAddressingHeaderRequired = u'tnsMessageAddressingHeaderRequired'# originally FaultCodesType.tnsMessageAddressingHeaderRequired
+FaultCodesOpenEnumType.tnsDestinationUnreachable = u'tnsDestinationUnreachable'# originally FaultCodesType.tnsDestinationUnreachable
+FaultCodesOpenEnumType.tnsActionNotSupported = u'tnsActionNotSupported'# originally FaultCodesType.tnsActionNotSupported
+FaultCodesOpenEnumType.tnsEndpointUnavailable = u'tnsEndpointUnavailable'# originally FaultCodesType.tnsEndpointUnavailable
 FaultCodesOpenEnumType._InitializeFacetMap(FaultCodesOpenEnumType._CF_enumeration,
    FaultCodesOpenEnumType._CF_pattern)
 Namespace.addCategoryObject('typeBinding', u'FaultCodesOpenEnumType', FaultCodesOpenEnumType)
@@ -427,11 +421,11 @@ def _BuildAutomaton ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'http://www.w3.org/2006/03/addressing/ws-addr.xsd', 26, 3))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'http://www.w3.org/2006/03/addressing/ws-addr.xsd', 26, 3))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'http://www.w3.org/2006/03/addressing/ws-addr.xsd', 27, 3))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'http://www.w3.org/2006/03/addressing/ws-addr.xsd', 27, 3))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location(u'http://www.w3.org/2006/03/addressing/ws-addr.xsd', 28, 3))
+    cc_2 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(u'http://www.w3.org/2006/03/addressing/ws-addr.xsd', 28, 3))
     counters.add(cc_2)
     states = []
     final_update = set()
@@ -492,7 +486,7 @@ def _BuildAutomaton_ ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location(u'http://www.w3.org/2006/03/addressing/ws-addr.xsd', 36, 3))
+    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(u'http://www.w3.org/2006/03/addressing/ws-addr.xsd', 36, 3))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -517,7 +511,7 @@ def _BuildAutomaton_2 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location(u'http://www.w3.org/2006/03/addressing/ws-addr.xsd', 44, 3))
+    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(u'http://www.w3.org/2006/03/addressing/ws-addr.xsd', 44, 3))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -546,9 +540,9 @@ def _BuildAutomaton_3 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'http://www.w3.org/2006/03/addressing/ws-addr.xsd', 131, 3))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'http://www.w3.org/2006/03/addressing/ws-addr.xsd', 131, 3))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'http://www.w3.org/2006/03/addressing/ws-addr.xsd', 132, 3))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'http://www.w3.org/2006/03/addressing/ws-addr.xsd', 132, 3))
     counters.add(cc_1)
     states = []
     final_update = set()

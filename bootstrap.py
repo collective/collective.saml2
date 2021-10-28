@@ -18,7 +18,7 @@ The script accepts buildout command-line options, so you can
 use the -c option to specify an alternate configuration file.
 """
 
-import os, shutil, sys, tempfile, urllib, urllib2, subprocess
+import os, shutil, sys, tempfile, urllib, urllib, subprocess
 from optparse import OptionParser
 
 if sys.platform == 'win32':
@@ -162,7 +162,7 @@ try:
     if not hasattr(pkg_resources, '_distribute'):
         raise ImportError
 except ImportError:
-    ez_code = urllib2.urlopen(
+    ez_code = urllib.urlopen(
         options.setup_source).read().replace('\r\n', '\n')
     ez = {}
     exec ez_code in ez
