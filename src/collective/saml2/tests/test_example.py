@@ -1,9 +1,8 @@
-import unittest2 as unittest
+import unittest
 
 from Products.CMFCore.utils import getToolByName
 
-from collective.saml2.testing import\
-    COLLECTIVE_SAML2_INTEGRATION_TESTING
+from collective.saml2.testing import COLLECTIVE_SAML2_INTEGRATION_TESTING
 
 
 class TestExample(unittest.TestCase):
