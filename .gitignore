@@ -26,3 +26,7 @@ projects
 .codeintel
 .installed.cfg
 .mr.developer.cfg
+__minitage__*
+.Python
+requirements.txt
+annotate.txt
