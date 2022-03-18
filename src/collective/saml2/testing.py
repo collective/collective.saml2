@@ -22,12 +22,13 @@ class CollectiveSAML2(PloneSandboxLayer):
 
         # create authority
         # 1. In the ZMI Add at the Plone root a "Saml authority" object.
-        # portal.manage_addProduct['dm.zope.saml2'].manage_addAuthority("authority", "saml2 auth")
+        # portal.manage_addProduct['dm.zope.saml2'].add_SamlAuthority("authority", "saml2 auth")
         from dm.zope.saml2.authority import SamlAuthority
         auth = SamlAuthority(title="My Auth", base_url=portal.absolute_url(), entity_id="TestSSO")
         # 2. Give it the id "saml2auth". It doesn't matter really what it's called but
         #    it will appear in the public `metadata`_ url you will give to the owners of
         #    other services
+        auth.id = "saml2auth"
         portal["saml2auth"] = auth
         # 3. Entity id. This is important. This is an id that should uniquely identify
         #    your service from other services that are part of the SSO network. For
@@ -37,12 +38,15 @@ class CollectiveSAML2(PloneSandboxLayer):
         # Create IdP
         from dm.zope.saml2.idpsso.idpsso import SimpleIdpssoAp
         idp = SimpleIdpssoAp()
+        idp.id = "saml2idp"
         portal['saml2idp'] = idp
 
         # Create another plone site with SP
         # TODO: create 2nd site or 2nd acl_users which will cause login
         from dm.zope.saml2.spsso.spsso import SimpleSpsso
-        portal['saml2sp'] = SimpleSpsso()
+        sp = SimpleSpsso()
+        sp.id = "saml2sp"
+        portal['saml2sp'] = sp
 
 
 COLLECTIVE_SAML2_FIXTURE = CollectiveSAML2()
