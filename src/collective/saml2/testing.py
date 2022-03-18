@@ -19,6 +19,13 @@ class CollectiveSAML2(PloneSandboxLayer):
     def setUpPloneSite(self, portal):
         applyProfile(portal, 'collective.saml2:default')
 
+        # create authority
+
+        # Create IdP
+
+        # Create another plone site with SP
+        
+
 COLLECTIVE_SAML2_FIXTURE = CollectiveSAML2()
 COLLECTIVE_SAML2_INTEGRATION_TESTING = \
     IntegrationTesting(bases=(COLLECTIVE_SAML2_FIXTURE, ),
