@@ -6,8 +6,12 @@
 >>> portalURL = portal.absolute_url()
 >>> browser.open(portalURL)
 
->>> browser.open(portal.absolute_url()+'/@@saml2_controlpanel')
+Try manual redirect url
+>>> browser.open(portal.absolute_url()+'/acl_users/saml2sp/login')
+>>> browser.content
 
->>> browser.getControl(name='__ac_name').value = TEST_USER_NAME
->>> browser.getControl(name='__ac_password').value = TEST_USER_PASSWORD
->>> browser.getControl(name='submit').click()
+# >>> browser.open(portal.absolute_url()+'/@@saml2_controlpanel')
+
+# >>> browser.getControl(name='__ac_name').value = TEST_USER_NAME
+# >>> browser.getControl(name='__ac_password').value = TEST_USER_PASSWORD
+# >>> browser.getControl(name='submit').click()

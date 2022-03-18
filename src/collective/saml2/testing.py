@@ -3,6 +3,7 @@ from plone.app.testing import PloneSandboxLayer
 from plone.app.testing import IntegrationTesting
 from plone.app.testing import applyProfile
 from zope.configuration import xmlconfig
+# from zope.component import createObject
 
 
 class CollectiveSAML2(PloneSandboxLayer):
@@ -20,11 +21,29 @@ class CollectiveSAML2(PloneSandboxLayer):
         applyProfile(portal, 'collective.saml2:default')
 
         # create authority
+        # 1. In the ZMI Add at the Plone root a "Saml authority" object.
+        # portal.manage_addProduct['dm.zope.saml2'].manage_addAuthority("authority", "saml2 auth")
+        from dm.zope.saml2.authority import SamlAuthority
+        auth = SamlAuthority(title="My Auth", base_url=portal.absolute_url(), entity_id="TestSSO")
+        # 2. Give it the id "saml2auth". It doesn't matter really what it's called but
+        #    it will appear in the public `metadata`_ url you will give to the owners of
+        #    other services
+        portal["saml2auth"] = auth
+        # 3. Entity id. This is important. This is an id that should uniquely identify
+        #    your service from other services that are part of the SSO network. For
+        #    example if your and the IdP with 10 different services using you for
+        #    authentication, your entity id will have to be unique.
 
         # Create IdP
+        from dm.zope.saml2.idpsso.idpsso import SimpleIdpssoAp
+        idp = SimpleIdpssoAp()
+        portal['saml2idp'] = idp
 
         # Create another plone site with SP
-        
+        # TODO: create 2nd site or 2nd acl_users which will cause login
+        from dm.zope.saml2.spsso.spsso import SimpleSpsso
+        portal['saml2sp'] = SimpleSpsso()
+
 
 COLLECTIVE_SAML2_FIXTURE = CollectiveSAML2()
 COLLECTIVE_SAML2_INTEGRATION_TESTING = \
