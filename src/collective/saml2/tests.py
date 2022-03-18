@@ -3,7 +3,7 @@ import doctest
 from collective.saml2.testing import COLLECTIVE_SAML2_INTEGRATION_TESTING
 
 
-OPTIONFLAGS = doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE
+OPTIONFLAGS = doctest.ELLIPSIS | doctest.NORMALIZE_WHITESPACE | doctest.REPORT_ONLY_FIRST_FAILURE
 
 
 def test_suite():

@@ -4,10 +4,12 @@
 >>> portal = layer['portal']
 >>> browser = Browser(portal)
 >>> portalURL = portal.absolute_url()
+>>> spURL = portal.aq_parent.plone2.absolute_url()
 >>> browser.open(portalURL)
 
+Our SP is setup in the base of the zope site and is a plain acl_users
 Try manual redirect url
->>> browser.open(portal.absolute_url()+'/acl_users/saml2sp/login')
+>>> browser.open(spURL + '/acl_users/saml2sp/login')
 
 Should redirect us back to the same site
 >>> browser.url
