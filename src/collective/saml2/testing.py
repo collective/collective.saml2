@@ -34,12 +34,13 @@ class CollectiveSAML2(PloneSandboxLayer):
         # 1. In the ZMI Add at the Plone root a "Saml authority" object.
         # portal.manage_addProduct['dm.zope.saml2'].add_SamlAuthority("authority", "saml2 auth")
         from dm.zope.saml2.authority import SamlAuthority
-        auth = SamlAuthority(title="My Auth", base_url=portal.absolute_url(), entity_id="TestSSO")
+        auth = SamlAuthority(title="My Auth", base_url=portal.absolute_url(), entity_id="TestIdP")
         # 2. Give it the id "saml2auth". It doesn't matter really what it's called but
         #    it will appear in the public `metadata`_ url you will give to the owners of
         #    other services
         auth.id = "saml2auth"
-        portal["saml2auth"] = auth
+        portal._setObject(auth.id, auth)
+        idp_metadata = portal.saml2auth.absolute_url() + "/metadata"
         # 3. Entity id. This is important. This is an id that should uniquely identify
         #    your service from other services that are part of the SSO network. For
         #    example if your and the IdP with 10 different services using you for
@@ -50,8 +51,9 @@ class CollectiveSAML2(PloneSandboxLayer):
         idp = SimpleIdpssoAp()
         portal._setObject('saml2idp', idp)
 
-        # Create another plone site with SP
         # TODO: create 2nd site or 2nd acl_users which will cause login
+
+        # For now we will use the root of zope as our IdP
         parent = portal.aq_parent
         # self.setupPlone2()
         # plone2 = parent.plone2
@@ -60,14 +62,15 @@ class CollectiveSAML2(PloneSandboxLayer):
         # Make root zope a site
         sm = site.LocalSiteManager(sp_site)
         sp_site.setSiteManager(sm)
-
         setSite(sp_site)
-        auth = SamlAuthority(title="My SP Auth", base_url=parent.absolute_url(), entity_id="TestSSO")
-        sp_site._setObject("saml2auth_sp", auth)
-        zcuf = sp_site._getOb("acl_users")
+
+        auth_sp = SamlAuthority(title="My SP Auth", base_url=parent.absolute_url(), entity_id="TestSP")
+        sp_site._setObject("saml2auth_sp", auth_sp)
+        sp_metadata = sp_site.saml2auth_sp.absolute_url() + "/metadata"
 
         from dm.zope.saml2.spsso.plugin import IntegratedSimpleSpssoPlugin
         sp = IntegratedSimpleSpssoPlugin()
+        zcuf = sp_site._getOb("acl_users")
         zcuf._setObject('saml2sp', sp)
 
         # TODO: active PAS plugins in SP. Challenge plugin. make sure its top
@@ -75,9 +78,33 @@ class CollectiveSAML2(PloneSandboxLayer):
         plugins.activatePlugin(IChallengePlugin, 'saml2sp')
         # plugins.activatePlugin( IAuthenticationPlugin, 'login' )
 
-        # TODO: authorise the metadata
+        # authorise the metadata connections
+        from dm.zope.saml2.entity import EntityByUrl
+        idp_connection = EntityByUrl(url=idp_metadata)
+        idp_connection.id = "TestIdP"
+        # Important: Must be the same id as entityid for our IdP
+        sp_site.saml2auth_sp._setObject(idp_connection.id, idp_connection,)
 
-        # PluggableAuthService
+        # put in the idp metadata url and activate
+        sp_connection = EntityByUrl(url=sp_metadata)
+        sp_connection.id = "TestSP"
+        portal.saml2auth._setObject(sp_connection.id, sp_connection)
+
+        # TODO: setup the trust connection IdP to SP
+
+        self.showErrors(portal)
+
+    def showErrors(self, portal):
+
+        portal.error_log._ignored_exceptions = ()
+
+        def raising(self, info):
+            import traceback
+            traceback.print_tb(info[2])
+            print info[1]
+
+        from Products.SiteErrorLog.SiteErrorLog import SiteErrorLog
+        SiteErrorLog.raising = raising
 
     def setupPlone2(self):
         import plone.app.testing.helpers
