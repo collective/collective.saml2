@@ -62,24 +62,90 @@ There is an `example buildout`_ to compile all these components from source
 if you want a completely standalone solution.
 
 
-Configuration
-=============
 
-First you need to decide if you want your Plone to be an IdP or an SP.
+Using Plone without passwords (SP Mode)
+=======================================
 
-An IdP means the users and passwords will be stored in your Plone site and other
-services will be configured to redirect to Plone to be able to login into their
-respective sites.
-
-An SP means that you won't store users and passwords locally and instead your
-users will be redirected to another site (the IdP) during the login process to
+An SP (Service Provider) means that you won't store users and passwords locally and instead your
+users will be redirected to another site (the IdP or Idendity Provider) during the login process to
 be authenticated. Examples of alternative IdP's might be `Microsoft Active Directory
 Federated services`_ (`ADFS`_) or `Shibboleth`_, or another Plone site configured
 as an IdP.
 
 
-Step 1. Setup your authority
-----------------------------
+1. Setup up the authority object. See below
+2. Go to ZMI Plone root and then acl_users.
+3. Add a "Saml integrated simple spsso plugin (integrated spsso)" object. Call it
+   `saml2sp`. Again id doesn't really matter.
+4. You can use the defaults. Save.
+5. Click the "activate tab" and activate each PAS plugin.
+6. Click 'Challenge' in the Activate tab and ensure `saml2sp` is the top plugin.
+   This means that if an UnAuthorized exception is thrown in Plone
+   the saml2 plugin will be used and the user will be directed to select a IdP
+   to login via. If this isn't done Plone's normal login page will display
+   and the only way to instigate a SAML login sequence is via the explicit
+   login url. The explicit login url in this case would be
+   'acl_users/saml2sp/login'.
+7. (optional) Create a new login link. Plone's default login link
+   in personal tools goes direct to the cookie based authentication form
+   /login. Instead create a page in the base of your site called /loggedin.
+   Make it private it and in the sharing tab make it visible to logged in users.
+   In ZMI '/portal_actions/user/login' set the URL to
+   'string:${globals_view/navigationRootUrl}/loggedin'. The user won't see this page
+   until after they login.
+4. Authorise Plone in the external Provider (see below)
+5. Authorise your external provider in Plone (see below)
+9. Test logging into Plone
+   - you should be redirected to your external IdP to login
+   - once successful you will be redirected back and Plone will be logged in
+
+
+
+Using Plone logins to login to other sites (IdP Mode)
+=====================================================
+
+An IdP (Identity Provider) means the users and passwords will be stored in your Plone site and other
+services will be configured to redirect to Plone to be able to login into their
+respective sites.
+
+If Plone is going to be your IdP do the following
+
+1. Setup up the authority object. See below
+    - ensure you have Certificate and private key set.
+2. Go to the ZMI plone root and add a
+   "Saml simple idpsso with integrated attribute provider".
+3. Give the id `saml2idp` but it doesn't really matter. This id will appear
+   in some of the urls used as part of the authentication process.
+4. Authorise Plone in the external Provider (see below)
+5. Authorise your external provider in Plone (see below)
+6. Test logging into your external site. 
+   - You should be redirected to plone to login and then redirected back again afterwards
+
+
+Member Attributes (optional)
+-------------------------
+
+If you set your Plone site up as an IdP then you make member attributes
+or arbritrary data available to the SP's.
+
+1. If you setup your IdP using these instructions you would have created an
+   object in your Plone root called `saml2idp` of type
+   'Saml simple idpsso with integrated attribute provider'. Open this.
+2. Click 'Add Saml provided attribute.
+3. If the data is an attribute of your member object such as provided by LDAP
+   plugin or another PAS plugin then just enter the attribute name as the id.
+   Otherwise pick an id and use the 'Evaluator' field togeather with a
+   PythonScript or a view to determine the information to send.
+4. External attribute name will be what the your SP uses to request this data.
+5. After configuring your attributes you metadata file will have changed to
+   reflect this additional service. You may need to ensure your SP obtains
+   the update metadata file.
+6. Configure your SP to request the attributes.nNote that the attributes will
+   not automatically be sent with the authentication response but rather are
+   sent in response to a `SAML Attribute Query`_.
+
+Setup your authority
+====================
 
 Regardless if you are going to be an IdP or SP you will need a single authority
 object. This object contains assertions about what your service can do and
@@ -107,80 +173,8 @@ that contains the SAML2 assertions.
    it behaves as the zope root URL).
 
 
-Next you will
-need to configure the other services that you will collaborate with. If you are
-an SP these will be IdP's that the user can choose to login into your service via.
-If you are an IdP these will be the SP's that are allowed to login via your site.
-
-
-Step 2. Setup your IdP
-----------------------
-
-If Plone is going to be your IdP do the following
-
-1. Go to the ZMI plone root and add a
-   "Saml simple idpsso with integrated attribute provider".
-2. Give the id `saml2idp` but it doesn't really matter. This id will appear
-   in the url of some of the urls used as part of the authentication process.
-3. You're done.
-
-If your IdP isn't a Plone site you will need to consult their documentation
-on how it needs to be configured.
-
-
-Step 3. Setup your SP
----------------------
-
-If your Plone is going to be your SP do the following
-
-1. Go to ZMI Plone root and then acl_users.
-2. Add a "Saml integrated simple spsso plugin (integrated spsso)" object. Call it
-   `saml2sp`. Again id doesn't really matter.
-3. You can use the defaults. Save.
-4. Click the "activate tab" and activate each PAS plugin.
-5. Click 'Challenge' in the Activate tab and ensure `saml2sp` is the top plugin.
-   This means that if an UnAuthorized exception is thrown in Plone
-   the saml2 plugin will be used and the user will be directed to select a IdP
-   to login via. If this isn't done Plone's normal login page will display
-   and the only way to instigate a SAML login sequence is via the explicit
-   login url. The explicit login url in this case would be
-   'acl_users/saml2sp/login'.
-6. (optional) Create a new login link. Plone's default login link
-   in personal tools goes direct to the cookie based authentication form
-   /login. Instead create a page in the base of your site called /loggedin.
-   Make it private it and in the sharing tab make it visible to logged in users.
-   In ZMI '/portal_actions/user/login' set the URL to
-   'string:${globals_view/navigationRootUrl}/loggedin'.
-
-If your Plone is the IdP and you are setting up another service as the SP you
-will need to look at the documentation of your SP on how to configure it.
-
-
-Step 4. Authorise
------------------
-
-Now that you have a working IdP and SP you will need to authorise them so they
-will work together. The SAML2 protocol is such that a IdP needs to know about the
-SP and visa versa for the authentication requests to work.
-
-Providers can be configured to authorise each other in different ways however
-`dm.zope.saml2`_ ONLY supports the `metadata`_ method. Your Plone site has
-a web accessible url to a `metadata`_ file that contains all the information
-the other providers need to authorise the Plone site. Likewise your other providers
-will need to provide a url to a `metadata`_ file that your Plone site can access.
-Periodically your Plone site will download this file. The
-file is then cached locally. The `metadata`_ contains the information about what
-kind of service and urls are needed or offered for the interaction.
-
-Note that the actual SAML2 authentication exchange doesn't require the SP and IdP
-to be directly connected, just that the end users browser be able to access both.
-However the `metadata`_ exchange does require direct connectivity between the services.
-If you don't have direct connectivity this can be
-worked around by moving your metadata files on a different webserver. Note however
-that your `metadata`_ file generated by Plone has an expiry date in it.
-You will need to periodically update your `metadata`_ file to ensure the expiry date
-is in the future.
-
+Authorise Plone in the external Provider
+========================================
 To configure another provider (SP or IdP) to authorise your Plone site
 
 1. Go to your SAML2 Authority object /saml2auth.
@@ -189,7 +183,7 @@ To configure another provider (SP or IdP) to authorise your Plone site
    will likely have to open this url in a new window/tab to see the XML properly.
    The url is the url to your saml authority object + '/metadata'.
    Note that you will get an error like "DOMGenerationError: Binding value inconsistent with content model"
-   if you try to access this url before you have done step 2 or 3.
+   if you try to access this url before you have setup SP or IdP in plone.
 3. Configure this url in the appropriate way in your provider. Ensure it can
    download and parse the metadata file.
 
@@ -199,7 +193,8 @@ but have retained the old way of doing configuration.
 In this case you will need to learn to read the `metadata`_
 file to get the urls and settings from it that your IdP will need.
 
-
+Authorise your external provider in Plone
+=========================================
 To configure your Plone site to authorize another provider (SP or IdP)
 
 1. Obtain the metadata url and the entity id from your other provider. The entity
@@ -217,38 +212,49 @@ manually generate a metadata file and place it in a web accessible location.
 Once you've done that, follow the above steps. For example here is documentation
 on creating `metadata files for shibboleth`_
 
+FAQ
+===
 
-Step 5. Test
-------------
+The external provider doesn't accept a metadata url?
+------------------------------------------------------------
+Providers can be configured to authorise each other in different ways however
+`dm.zope.saml2`_ ONLY supports the `metadata`_ method. Your Plone site has
+a web accessible url to a `metadata`_ file that contains all the information
+the other providers need to authorise the Plone site. Likewise your other providers
+will need to provide a url to a `metadata`_ file that your Plone site can access.
+Periodically your Plone site will download this file. The
+file is then cached locally. The `metadata`_ contains the information about what
+kind of service and urls are needed or offered for the interaction.
 
-To test an IdP you will need a SP. You can use another Plone site (same one
-won't work) or another SAML2 SP. To test an SP you will need a IdP.
-You can use another Plone site or another SAML2 SP.
+I can't access the providers url from plone or visa versa?
+----------------------------------------------------------
+Note that the actual SAML2 authentication exchange doesn't require the SP and IdP
+to be directly connected, just that the end users browser be able to access both.
+However the `metadata`_ exchange does require direct connectivity between the services.
+If you don't have direct connectivity this can be
+worked around by moving your metadata files on a different webserver. Note however
+that your `metadata`_ file generated by Plone has an expiry date in it.
+You will need to periodically update your `metadata`_ file to ensure the expiry date
+is in the future.
 
-It's possible to create two Plone sites in the same instance and authorise
-one to authenticate via the other.
+The external entityid is a url
+------------------------------
+This doesn't appear to be supported currently as the entityid is assumed to be a valid zope id
+to be configured.
 
-Step 5. Member Attributes
--------------------------
+I can't login to an external IdP
+--------------------------------
+You can test you have a valid setup be configuring a different IdP and seeing if that works. 
+For example you could create an extra Plone site in the same zope instance and configure this as
+an IdP to test with.
 
-If you set your Plone site up as an IdP then you make member attributes
-or arbritrary data available to the SP's.
+I am having problems logging into my external site
+--------------------------------------------------
+Try testing your Plone IdP configuration by configuring another service provider to use it.
+For example you can setup another plone site on the same zope instance as a SP and test if this
+can login using your Plone based IdP.
 
-1. If you setup your IdP using these instructions you would have created an
-   object in your Plone root called `saml2idp` of type
-   'Saml simple idpsso with integrated attribute provider'. Open this.
-2. Click 'Add Saml provided attribute.
-3. If the data is an attribute of your member object such as provided by LDAP
-   plugin or another PAS plugin then just enter the attribute name as the id.
-   Otherwise pick an id and use the 'Evaluator' field togeather with a
-   PythonScript or a view to determine the information to send.
-4. External attribute name will be what the your SP uses to request this data.
-5. After configuring your attributes you metadata file will have changed to
-   reflect this additional service. You may need to ensure your SP obtains
-   the update metadata file.
-6. Configure your SP to request the attributes.nNote that the attributes will
-   not automatically be sent with the authentication response but rather are
-   sent in response to a `SAML Attribute Query`_.
+
 
 TODO
 
