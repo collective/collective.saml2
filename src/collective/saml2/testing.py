@@ -5,11 +5,13 @@ from plone.app.testing import applyProfile
 from plone.app.testing.helpers import ploneSite
 from plone.app.testing.helpers import pushGlobalRegistry
 from plone.app.testing.helpers import persist_profile_upgrade_versions
+from zope import site
 
 from zope.configuration import xmlconfig
 from zope.component.hooks import setHooks
 from zope.component.hooks import setSite
 from plone.testing import security
+from Products.PluggableAuthService.interfaces.plugins import IChallengePlugin
 
 # from zope.component import createObject
 
@@ -46,25 +48,34 @@ class CollectiveSAML2(PloneSandboxLayer):
         # Create IdP
         from dm.zope.saml2.idpsso.idpsso import SimpleIdpssoAp
         idp = SimpleIdpssoAp()
-        idp.id = "saml2idp"
-        portal['saml2idp'] = idp
+        portal._setObject('saml2idp', idp)
 
         # Create another plone site with SP
         # TODO: create 2nd site or 2nd acl_users which will cause login
         parent = portal.aq_parent
-        self.setupPlone2()
+        # self.setupPlone2()
+        # plone2 = parent.plone2
+        sp_site = parent
 
-        plone2 = parent.plone2
+        # Make root zope a site
+        sm = site.LocalSiteManager(sp_site)
+        sp_site.setSiteManager(sm)
 
-        setSite(portal)
+        setSite(sp_site)
         auth = SamlAuthority(title="My SP Auth", base_url=parent.absolute_url(), entity_id="TestSSO")
-        auth.id = "saml2auth_sp"
-        plone2["saml2auth_sp"] = auth
+        sp_site._setObject("saml2auth_sp", auth)
+        zcuf = sp_site._getOb("acl_users")
 
-        from dm.zope.saml2.spsso.spsso import SimpleSpsso
-        sp = SimpleSpsso()
-        sp.id = "saml2sp"
-        plone2['saml2sp'] = sp
+        from dm.zope.saml2.spsso.plugin import IntegratedSimpleSpssoPlugin
+        sp = IntegratedSimpleSpssoPlugin()
+        zcuf._setObject('saml2sp', sp)
+
+        # TODO: active PAS plugins in SP. Challenge plugin. make sure its top
+        plugins = zcuf._getOb('plugins')
+        plugins.activatePlugin(IChallengePlugin, 'saml2sp')
+        # plugins.activatePlugin( IAuthenticationPlugin, 'login' )
+
+        # TODO: authorise the metadata
 
         # PluggableAuthService
 
