@@ -1,9 +1,8 @@
-import unittest2 as unittest
+import unittest
 
 from Products.CMFCore.utils import getToolByName
 
-from collective.saml2.testing import\
-    COLLECTIVE_SAML2_INTEGRATION_TESTING
+from collective.saml2.testing import COLLECTIVE_SAML2_INTEGRATION_TESTING
 
 
 class TestExample(unittest.TestCase):
@@ -24,4 +23,3 @@ class TestExample(unittest.TestCase):
         installed = [p['id'] for p in self.qi_tool.listInstalledProducts()]
         self.assertTrue(pid in installed,
                         'package appears not to have been installed')
-

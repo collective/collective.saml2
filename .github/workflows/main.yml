@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  push:
+    branches-ignore:
+      - "releases/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        plone-version:
+          - '5.0'
+          - '5.1'
+          - '5.2'
+        python-version: ['2.7']
+        include:
+          # Only 5.2+ runs on py3
+          - plone-version: 5.2
+            python-version: 3.8
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -y
+          # sudo apt-get install -y build-essentials
+          sudo apt-get install -y libxml2-dev libxslt-dev python-dev libxmlsec1-dev openssl
+          # sudo apt-get install py-pip
+          pip install virtualenv wheel
+          pip install python-saml
+      - name: Cache multiple paths
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/buildout-cache
+            ~/extends
+            ~/.cache/pip
+          key: ${{ runner.os }}-${{ matrix.python-version }}-${{ matrix.plone-version }}-${{ hashFiles('**/*.cfg') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.python-version }}-${{ matrix.plone-version }}-
+            ${{ runner.os }}-${{ matrix.python-version }}-
+            ${{ runner.os }}-
+      - name: setup buildout cache
+        run: |
+            mkdir -p ~/buildout-cache/{eggs,downloads}
+            mkdir ~/.buildout
+            echo "[buildout]" > $HOME/.buildout/default.cfg
+            echo "download-cache = $HOME/buildout-cache/downloads" >> $HOME/.buildout/default.cfg
+            echo "eggs-directory = $HOME/buildout-cache/eggs" >> $HOME/.buildout/default.cfg
+      - name: bootstrap buildout
+        run: |
+          ./bootstrap.sh test-${{ matrix.plone-version }}.x.cfg
+          ls -al
+      - name: buildout
+        run: |
+          bin/buildout -t 10 -Nc test-${{ matrix.plone-version }}.x.cfg
+          bin/pip install zest.pocompile
+          bin/pocompile src
+      - name: tests
+        run: |
+            bin/test --list-tests            
+            bin/test
