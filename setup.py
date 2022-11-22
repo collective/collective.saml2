@@ -25,7 +25,7 @@ setup(name='collective.saml2',
       keywords='Plone Python',
       author='Pretaweb',
       author_email='support@pretaweb.com',
-      url='http://github.com/collective/collective.listingviews',
+      url='https://github.com/collective/collective.saml2',
       license='gpl',
       packages=find_packages('src'),
       package_dir={'': 'src'},
@@ -37,9 +37,9 @@ setup(name='collective.saml2',
           # -*- Extra requirements: -*-
           'dm.saml2 > 2.0.4',
           'dm.zope.saml2 > 2.0b7',
-          'PyXB == 1.2.3',#maybe it is not necessary. But bindings may not be compatible between versions 
+          'PyXB == 1.2.6',  # maybe it is not necessary. But bindings may not be compatible between versions
           'dm.xmlsec.binding > 1.1',
-          'zope.app.component'#until import in dm.zope.saml2 is not fixed
+          'zope.app.component',  # until import in dm.zope.saml2 is not fixed
       ],
       extras_require={'test': ['plone.app.testing']},
       entry_points="""

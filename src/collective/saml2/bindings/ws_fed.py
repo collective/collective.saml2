@@ -18,22 +18,16 @@ import sys
 # Unique identifier for bindings created at the same time
 _GenerationUID = pyxb.utils.utility.UniqueIdentifier('urn:uuid:dbbe0922-5090-11e4-8d5b-3c77e646c78e')
 
-# Version of PyXB used to generate the bindings
-_PyXBVersion = '1.2.3'
-# Generated bindings are not compatible across PyXB versions
-if pyxb.__version__ != _PyXBVersion:
-    raise pyxb.PyXBVersionError(_PyXBVersion)
-
 # Import bindings for namespaces imported into schema
 #import _md as _ImportedBinding__md
 import pyxb.bundles.saml20.raw.metadata as _ImportedBinding__md
 import pyxb.binding.datatypes
 #import _ds as _ImportedBinding__ds
 import pyxb.bundles.wssplat.raw.ds as _ImportedBinding__ds
-import _sp as _ImportedBinding__sp
-import _wsu as _ImportedBinding__wsu
-import _auth as _ImportedBinding__auth
-import _wsa as _ImportedBinding__wsa
+from . import _sp as _ImportedBinding__sp
+from . import _wsu as _ImportedBinding__wsu
+from . import _auth as _ImportedBinding__auth
+from . import _wsa as _ImportedBinding__wsa
 
 # NOTE: All namespace declarations are reserved within the binding
 Namespace = pyxb.namespace.NamespaceForURI(u'http://docs.oasis-open.org/wsfed/federation/200706', create_if_missing=True)
@@ -1501,7 +1495,7 @@ def _BuildAutomaton ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 61, 3))
+    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 61, 3))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -1526,7 +1520,7 @@ def _BuildAutomaton_ ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 68, 3))
+    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 68, 3))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -1601,7 +1595,7 @@ def _BuildAutomaton_4 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 207, 3))
+    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 207, 3))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -1636,7 +1630,7 @@ def _BuildAutomaton_5 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 214, 3))
+    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 214, 3))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -1733,7 +1727,7 @@ def _BuildAutomaton_9 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 252, 6))
+    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 252, 6))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -1762,9 +1756,9 @@ def _BuildAutomaton_10 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 279, 3))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 279, 3))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 281, 3))
+    cc_1 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 281, 3))
     counters.add(cc_1)
     states = []
     final_update = None
@@ -1833,11 +1827,11 @@ def _BuildAutomaton_12 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 301, 3))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 301, 3))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 302, 3))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 302, 3))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 303, 3))
+    cc_2 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 303, 3))
     counters.add(cc_2)
     states = []
     final_update = set()
@@ -1906,7 +1900,7 @@ def _BuildAutomaton_14 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 319, 3))
+    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 319, 3))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -1935,7 +1929,7 @@ def _BuildAutomaton_15 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 341, 3))
+    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 341, 3))
     counters.add(cc_0)
     states = []
     final_update = None
@@ -2016,7 +2010,7 @@ def _BuildAutomaton_18 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 366, 3))
+    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 366, 3))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -2049,13 +2043,13 @@ def _BuildAutomaton_19 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 378, 3))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 378, 3))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 379, 3))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 379, 3))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 380, 3))
+    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 380, 3))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 381, 3))
+    cc_3 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 381, 3))
     counters.add(cc_3)
     states = []
     final_update = set()
@@ -2135,7 +2129,7 @@ def _BuildAutomaton_20 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 408, 3))
+    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 408, 3))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -2166,13 +2160,13 @@ def _BuildAutomaton_21 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 417, 3))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 417, 3))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 418, 3))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 418, 3))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 419, 3))
+    cc_2 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 419, 3))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 420, 3))
+    cc_3 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 420, 3))
     counters.add(cc_3)
     states = []
     final_update = set()
@@ -2236,7 +2230,7 @@ def _BuildAutomaton_22 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 450, 3))
+    cc_0 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 450, 3))
     counters.add(cc_0)
     states = []
     final_update = set()
@@ -2275,29 +2269,29 @@ def _BuildAutomaton_23 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 173, 12))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 173, 12))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 174, 12))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 174, 12))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 175, 12))
+    cc_2 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 175, 12))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 176, 12))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 176, 12))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 177, 12))
+    cc_4 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 177, 12))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 79, 10))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 79, 10))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 80, 10))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 80, 10))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 81, 10))
+    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 81, 10))
     counters.add(cc_7)
-    cc_8 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 82, 10))
+    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 82, 10))
     counters.add(cc_8)
-    cc_9 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 83, 10))
+    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 83, 10))
     counters.add(cc_9)
-    cc_10 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 84, 10))
+    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 84, 10))
     counters.add(cc_10)
-    cc_11 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 85, 10))
+    cc_11 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 85, 10))
     counters.add(cc_11)
     states = []
     final_update = set()
@@ -2561,35 +2555,35 @@ def _BuildAutomaton_24 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 173, 12))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 173, 12))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 174, 12))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 174, 12))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 175, 12))
+    cc_2 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 175, 12))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 176, 12))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 176, 12))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 177, 12))
+    cc_4 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 177, 12))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 79, 10))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 79, 10))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 80, 10))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 80, 10))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 81, 10))
+    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 81, 10))
     counters.add(cc_7)
-    cc_8 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 82, 10))
+    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 82, 10))
     counters.add(cc_8)
-    cc_9 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 83, 10))
+    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 83, 10))
     counters.add(cc_9)
-    cc_10 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 84, 10))
+    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 84, 10))
     counters.add(cc_10)
-    cc_11 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 85, 10))
+    cc_11 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 85, 10))
     counters.add(cc_11)
-    cc_12 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 107, 10))
+    cc_12 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 107, 10))
     counters.add(cc_12)
-    cc_13 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 108, 10))
+    cc_13 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 108, 10))
     counters.add(cc_13)
-    cc_14 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 109, 10))
+    cc_14 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 109, 10))
     counters.add(cc_14)
     states = []
     final_update = None
@@ -2908,31 +2902,31 @@ def _BuildAutomaton_25 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 173, 12))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 173, 12))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 174, 12))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 174, 12))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 175, 12))
+    cc_2 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 175, 12))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 176, 12))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 176, 12))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 177, 12))
+    cc_4 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 177, 12))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 79, 10))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 79, 10))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 80, 10))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 80, 10))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 81, 10))
+    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 81, 10))
     counters.add(cc_7)
-    cc_8 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 82, 10))
+    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 82, 10))
     counters.add(cc_8)
-    cc_9 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 83, 10))
+    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 83, 10))
     counters.add(cc_9)
-    cc_10 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 84, 10))
+    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 84, 10))
     counters.add(cc_10)
-    cc_11 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 85, 10))
+    cc_11 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 85, 10))
     counters.add(cc_11)
-    cc_12 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 125, 10))
+    cc_12 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 125, 10))
     counters.add(cc_12)
     states = []
     final_update = None
@@ -3223,31 +3217,31 @@ def _BuildAutomaton_26 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 173, 12))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 173, 12))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 174, 12))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 174, 12))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 175, 12))
+    cc_2 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 175, 12))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 176, 12))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 176, 12))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 177, 12))
+    cc_4 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 177, 12))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 79, 10))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 79, 10))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 80, 10))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 80, 10))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 81, 10))
+    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 81, 10))
     counters.add(cc_7)
-    cc_8 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 82, 10))
+    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 82, 10))
     counters.add(cc_8)
-    cc_9 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 83, 10))
+    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 83, 10))
     counters.add(cc_9)
-    cc_10 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 84, 10))
+    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 84, 10))
     counters.add(cc_10)
-    cc_11 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 85, 10))
+    cc_11 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 85, 10))
     counters.add(cc_11)
-    cc_12 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 141, 10))
+    cc_12 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 141, 10))
     counters.add(cc_12)
     states = []
     final_update = None
@@ -3540,33 +3534,33 @@ def _BuildAutomaton_27 ():
     import pyxb.utils.fac as fac
 
     counters = set()
-    cc_0 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 173, 12))
+    cc_0 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 173, 12))
     counters.add(cc_0)
-    cc_1 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 174, 12))
+    cc_1 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 174, 12))
     counters.add(cc_1)
-    cc_2 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 175, 12))
+    cc_2 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 175, 12))
     counters.add(cc_2)
-    cc_3 = fac.CounterCondition(min=0L, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 176, 12))
+    cc_3 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 176, 12))
     counters.add(cc_3)
-    cc_4 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 177, 12))
+    cc_4 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location(u'http://docs.oasis-open.org/security/saml/v2.0/saml-schema-metadata-2.0.xsd', 177, 12))
     counters.add(cc_4)
-    cc_5 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 79, 10))
+    cc_5 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 79, 10))
     counters.add(cc_5)
-    cc_6 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 80, 10))
+    cc_6 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 80, 10))
     counters.add(cc_6)
-    cc_7 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 81, 10))
+    cc_7 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 81, 10))
     counters.add(cc_7)
-    cc_8 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 82, 10))
+    cc_8 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 82, 10))
     counters.add(cc_8)
-    cc_9 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 83, 10))
+    cc_9 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 83, 10))
     counters.add(cc_9)
-    cc_10 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 84, 10))
+    cc_10 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 84, 10))
     counters.add(cc_10)
-    cc_11 = fac.CounterCondition(min=0L, max=1L, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 85, 10))
+    cc_11 = fac.CounterCondition(min=0, max=1, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 85, 10))
     counters.add(cc_11)
-    cc_12 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 156, 10))
+    cc_12 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 156, 10))
     counters.add(cc_12)
-    cc_13 = fac.CounterCondition(min=0L, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 157, 10))
+    cc_13 = fac.CounterCondition(min=0, max=None, metadata=pyxb.utils.utility.Location('http://docs.oasis-open.org/wsfed/federation/v1.2/os/ws-federation.xsd', 157, 10))
     counters.add(cc_13)
     states = []
     final_update = None
